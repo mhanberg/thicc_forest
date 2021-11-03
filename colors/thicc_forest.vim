@@ -11,6 +11,6 @@ let g:colors_name="thicc_forest"
 "
 " Note if you're working in on your theme and have lush.ify'd the buffer,
 " your changes will be applied with our without the following line.
-lua package.loaded['lush_theme.thicc_forest'] = nil
+lua package.loaded["thicc_forest"] = nil
 
-lua require('lush')(require('lush_theme.thicc_forest'))
+lua require("lush")(require("thicc_forest"))

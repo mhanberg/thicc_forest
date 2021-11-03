@@ -4,7 +4,7 @@ vim.g.thicc_forest = { italics = true }
 
 local italics = vim.g.thicc_forest.italics and "italic" or nil
 
-local thicc_colors = require("lush_theme.thicc_forest.colors")
+local thicc_colors = require("thicc_forest.colors")
 
 local bg0 = thicc_colors.bg0
 local bg1 = thicc_colors.bg1

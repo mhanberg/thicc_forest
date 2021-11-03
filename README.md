@@ -1,10 +1,10 @@
-# Thicc Forest
+# thicc_forest
 
 My Neovim colorscheme.
 
 ## Install
 
-Add Thicc Forest as a plugin.
+Add thicc_forest as a plugin.
 
 ```lua
 use {
