@@ -3,6 +3,14 @@ local hsl = lush.hsl
 
 local M = {}
 
+-- looks like since Lush does a hex -> hsl -> hex conversion,
+-- we get a different color rendered than what is specificed here.
+-- I might look into using ColorBuddy instead of Lush, as I don't
+-- really care about HSL over hex, and I would rather have the colors
+-- be exactly as I've specified.
+--
+-- but ¯\_(ツ)_/¯
+
 M.red = hsl("#e68183")
 M.orange = hsl("#e39b7b")
 M.yellow = hsl("#d9bb80")
@@ -24,13 +32,12 @@ M.bg_green = hsl("#4e6053")
 M.bg_blue = hsl("#415c6d")
 M.bg_yellow = hsl("#5d5c50")
 M.bg_purple = hsl("#402F37")
-M.bg_cyan = hsl("#2D4031")
+M.bg_cyan = hsl("#54816B")
 
 M.fg = hsl("#d8caac")
 
 M.grey0 = hsl("#7c8377")
 M.grey1 = hsl("#868d80")
 M.grey2 = hsl("#999f93")
-
 
 return M

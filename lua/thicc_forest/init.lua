@@ -90,9 +90,9 @@ local theme = lush(function()
     CursorColumn { fg = nil, bg = bg1 }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     CursorLine { fg = nil, bg = bg1 }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
     Directory { fg = green, bg = nil }, -- directory names (and other special names in listings)
-    DiffAdd { fg = nil, bg = bg_green }, -- diff mode: Added line |diff.txt|
-    DiffChange { fg = nil, bg = bg_blue }, -- diff mode: Changed line |diff.txt|
-    DiffDelete { fg = nil, bg = bg_red }, -- diff mode: Deleted line |diff.txt|
+    DiffAdd { fg = green, bg = bg_green }, -- diff mode: Added line |diff.txt|
+    DiffChange { fg = blue, bg = bg_blue }, -- diff mode: Changed line |diff.txt|
+    DiffDelete { fg = red, bg = bg_red }, -- diff mode: Deleted line |diff.txt|
     DiffText { fg = bg0, bg = fg }, -- diff mode: Changed text within a changed line |diff.txt|
     EndOfBuffer { fg = bg0, bg = bg0 }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     TermCursor { Cursor }, -- cursor in a focused terminal
@@ -212,15 +212,15 @@ local theme = lush(function()
     BlueItalic { fg = blue, bg = nil, gui = italics },
     PurpleItalic { fg = purple, bg = nil, gui = italics },
 
-    ErrorText { fg = nil, bg = bg_red, gui = "undercurl", sp = red },
-    WarningText { fg = nil, bg = bg_yellow, gui = "undercurl", sp = yellow },
-    InfoText { fg = nil, bg = bg_blue, gui = "undercurl", sp = blue },
-    HintText { fg = nil, bg = bg_green, gui = "undercurl", sp = green },
+    ErrorText { fg = red, bg = bg_red, gui = "undercurl", sp = red },
+    WarningText { fg = yellow, bg = bg_yellow, gui = "undercurl", sp = yellow },
+    InfoText { fg = blue, bg = bg_blue, gui = "undercurl", sp = blue },
+    HintText { fg = green, bg = bg_green, gui = "undercurl", sp = green },
 
-    ErrorLine { fg = nil, bg = bg_red },
-    WarningLine { fg = nil, bg = bg_yellow },
-    InfoLine { fg = nil, bg = bg_blue },
-    HintLine { fg = nil, bg = bg_green },
+    ErrorLine { fg = red, bg = bg_red },
+    WarningLine { fg = yellow, bg = bg_yellow },
+    InfoLine { fg = blue, bg = bg_blue },
+    HintLine { fg = green, bg = bg_green },
 
     ErrorFloat { fg = red, bg = bg2 },
     WarningFloat { fg = yellow, bg = bg2 },
