@@ -2,6 +2,8 @@
 
 My Neovim colorscheme.
 
+![Screenshot of thicc_forest colorescheme for vim](./screenshots/react.png)
+
 ## Install
 
 Add thicc_forest as a plugin.
