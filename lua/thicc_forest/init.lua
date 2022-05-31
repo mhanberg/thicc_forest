@@ -30,14 +30,14 @@ local blue = thicc_colors.blue
 local purple = thicc_colors.purple
 
 local terminal_colors = {
-  black = bg3,
-  red = red,
-  yellow = yellow,
-  green = green,
-  cyan = aqua,
-  blue = blue,
-  purple = purple,
-  white = fg,
+	black = bg3,
+	red = red,
+	yellow = yellow,
+	green = green,
+	cyan = aqua,
+	blue = blue,
+	purple = purple,
+	white = fg,
 }
 
 vim.g.terminal_color_0 = tostring(terminal_colors.black)
@@ -58,18 +58,18 @@ vim.g.terminal_color_14 = tostring(terminal_colors.cyan)
 vim.g.terminal_color_15 = tostring(terminal_colors.white)
 
 vim.g.fzf_colors = {
-  fg = { "fg", "Normal" },
-  bg = { "bg", "Normal" },
-  hl = { "fg", "Green" },
-  ["fg+"] = { "fg", "CursorLine", "CursorColumn", "Normal" },
-  ["bg+"] = { "bg", "CursorLine", "CursorColumn" },
-  ["hl+"] = { "fg", "Cyan" },
-  info = { "fg", "Aqua" },
-  prompt = { "fg", "Orange" },
-  pointer = { "fg", "Blue" },
-  marker = { "fg", "Yellow" },
-  spinner = { "fg", "Yellow" },
-  header = { "fg", "Grey" },
+	fg = { "fg", "Normal" },
+	bg = { "bg", "Normal" },
+	hl = { "fg", "Green" },
+	["fg+"] = { "fg", "CursorLine", "CursorColumn", "Normal" },
+	["bg+"] = { "bg", "CursorLine", "CursorColumn" },
+	["hl+"] = { "fg", "Cyan" },
+	info = { "fg", "Aqua" },
+	prompt = { "fg", "Orange" },
+	pointer = { "fg", "Blue" },
+	marker = { "fg", "Yellow" },
+	spinner = { "fg", "Yellow" },
+	header = { "fg", "Grey" },
 }
 
 vim.g.VM_Mono_hl = "Cursor"
@@ -212,10 +212,10 @@ local theme = lush(function()
     BlueItalic { fg = blue, bg = nil, gui = italics },
     PurpleItalic { fg = purple, bg = nil, gui = italics },
 
-    ErrorText { fg = red, bg = bg_red, gui = "undercurl", sp = red },
-    WarningText { fg = yellow, bg = bg_yellow, gui = "undercurl", sp = yellow },
-    InfoText { fg = blue, bg = bg_blue, gui = "undercurl", sp = blue },
-    HintText { fg = green, bg = bg_green, gui = "undercurl", sp = green },
+    ErrorText { gui = "undercurl", sp = red },
+    WarningText { gui = "undercurl", sp = yellow },
+    InfoText { gui = "undercurl", sp = blue },
+    HintText { gui = "undercurl", sp = green },
 
     ErrorLine { fg = red, bg = bg_red },
     WarningLine { fg = yellow, bg = bg_yellow },
@@ -260,6 +260,10 @@ local theme = lush(function()
     LspReferenceText { CurrentWord },
     LspReferenceRead { CurrentWord },
     LspReferenceWrite { CurrentWord },
+
+    LspCodeLens { HintText },
+    LspCodeLensSeparator { HintText },
+
     TermCursor { Cursor },
     healthError { Red },
     healthSuccess { Green },
@@ -317,7 +321,7 @@ local theme = lush(function()
     TSFunction { Green },
     TSInclude { PurpleItalic },
     TSKeyword { Red },
-    TSKeywordFunction { Red },
+    TSKeywordFunction { RedItalic },
     TSLabel { Orange },
     TSMethod { Green },
     TSNamespace { BlueItalic },
@@ -403,7 +407,10 @@ local theme = lush(function()
     CmpItemAbbr { Fg },
     CmpItemAbbrMatch { markdownH4 },
     CmpItemAbbrMatchFuzzy { markdownH4 },
-    CmpItemMenu { bg = bg0 }
+    CmpItemMenu { bg = bg0 },
+
+    WinBar { fg = bg0, bg = yellow, gui = "italic" },
+    WinBarNC { fg = fg, bg = bg_yellow, gui = "italic" },
   }
 end)
 
