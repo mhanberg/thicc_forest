@@ -411,6 +411,33 @@ local theme = lush(function()
 
     WinBar { fg = bg0, bg = yellow, gui = "italic" },
     WinBarNC { fg = fg, bg = bg_yellow, gui = "italic" },
+
+    FineCmdNormal {fg = fg, bg = bg1},
+    FineCmdFloatBorder {fg = fg, bg = nil},
+
+    NotifyERRORBorder { fg = red },
+    NotifyWARNBorder { fg = orange },
+    NotifyINFOBorder { fg = green },
+    NotifyDEBUGBorder { fg = cyan },
+    NotifyTRACEBorder { fg = fg },
+
+    NotifyERRORIcon { fg = red },
+    NotifyWARNIcon { fg = orange },
+    NotifyINFOIcon { fg = green },
+    NotifyDEBUGIcon { fg = cyan  },
+    NotifyTRACEIcon { fg = fg },
+
+    NotifyERRORTitle { fg = red },
+    NotifyWARNTitle { fg = orange },
+    NotifyINFOTitle { fg = green },
+    NotifyDEBUGTitle { fg = cyan },
+    NotifyTRACETitle { fg = fg },
+
+    NotifyERRORBody { Normal },
+    NotifyWARNBody { Normal },
+    NotifyINFOBody { Normal },
+    NotifyDEBUGBody { Normal },
+    NotifyTRACEBody { Normal }
   }
 end)
 
