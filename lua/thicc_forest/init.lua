@@ -99,7 +99,8 @@ vim.g.VM_Cursor_hl = "Cursor"
 vim.g.VM_Insert_hl = "Cursor"
 
 -- stylua: ignore start
-local theme = lush(function()
+local theme = lush(function(injected_functions)
+  local sym = injected_functions.sym
   return {
     ColorColumn { fg = nil, bg = bg1 }, -- used for the columns set with 'colorcolumn'
     Conceal { fg = grey1, bg = nil }, -- placeholder characters substituted for concealed text (see 'conceallevel')
@@ -332,7 +333,7 @@ local theme = lush(function()
     sym("@boolean")  { Purple },
     sym("@character") { Yellow },
     sym("@comment") { Grey },
-    sym("@conditional ") { Red },
+    sym("@conditional") { Red },
     sym("@constant.builtin") { PurpleItalic },
     sym("@constant.macro") { Purple },
     sym("@constant") { PurpleItalic },
