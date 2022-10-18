@@ -72,13 +72,35 @@ vim.g.fzf_colors = {
 	header = { "fg", "Grey" },
 }
 
+-- --color=border:black,prompt:#e39b7b,marker:#d9bb80
+--
+-- --color=fg:#d8caac,bg:#273433,hl:#a7c080,fg+:#d8caac,bg+:#394C4A,hl+:#87c095,info:#87c095,prompt:#e39b7b,pointer:#83b6af,marker:#d9bb80,spinner:#d9bb80,header:#868d80,border:black
+--
+-- border:black,prompt:#e39b7b,marker:#d9bb80
+--
+--
+
+	-- fg = { "fg", "Normal" },
+	-- bg = { "bg", "Normal" },
+	-- hl = { "fg", "Green" },
+	-- ["fg+"] = { "fg", "CursorLine", "CursorColumn", "Normal" },
+	-- ["bg+"] = { "bg", "CursorLine", "CursorColumn" },
+	-- ["hl+"] = { "fg", "Cyan" },
+	-- info = { "fg", "Aqua" },
+	-- prompt = { "fg", "Orange" },
+	-- pointer = { "fg", "Blue" },
+	-- marker = { "fg", "Yellow" },
+	-- spinner = { "fg", "Yellow" },
+	-- header = { "fg", "Grey" },
+
 vim.g.VM_Mono_hl = "Cursor"
 vim.g.VM_Extend_hl = "Visual"
 vim.g.VM_Cursor_hl = "Cursor"
 vim.g.VM_Insert_hl = "Cursor"
 
 -- stylua: ignore start
-local theme = lush(function()
+local theme = lush(function(injected_functions)
+  local sym = injected_functions.sym
   return {
     ColorColumn { fg = nil, bg = bg1 }, -- used for the columns set with 'colorcolumn'
     Conceal { fg = grey1, bg = nil }, -- placeholder characters substituted for concealed text (see 'conceallevel')
@@ -114,6 +136,7 @@ local theme = lush(function()
     NonText { fg = bg4, bg = nil }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     Normal { fg = fg, bg = bg0 }, -- normal text
     NormalFloat { fg = fg, bg = bg2 }, -- Normal text in floating windows.
+    FloatBorder { fg = fg, bg = bg2 }, -- Normal text in floating windows.
     FloatermBorder { fg = fg, guibg = bg }, -- Border for Floaterm.
     -- NormalNC     { }, -- normal text in non-current windows
     Pmenu { fg = fg, bg = bg2 }, -- Popup menu: normal item.
@@ -302,52 +325,55 @@ local theme = lush(function()
     markdownBoldDelimiter { Grey },
     markdownId { Yellow },
 
-    TSAnnotation { Purple },
-    TSAttribute { Purple },
-    TSBoolean { Purple },
-    TSCharacter { Yellow },
-    TSComment { Grey },
-    TSConditional { Red },
-    TSConstBuiltin { PurpleItalic },
-    TSConstMacro { Purple },
-    TSConstant { PurpleItalic },
-    TSConstructor { Fg },
-    TSError { ErrorText },
-    TSException { Red },
-    TSField { Green },
-    TSFloat { Purple },
-    TSFuncBuiltin { Green },
-    TSFuncMacro { Green },
-    TSFunction { Green },
-    TSInclude { PurpleItalic },
-    TSKeyword { Red },
-    TSKeywordFunction { RedItalic },
-    TSLabel { Orange },
-    TSMethod { Green },
-    TSNamespace { BlueItalic },
-    TSNumber { Purple },
-    TSOperator { Orange },
-    TSParameter { Fg },
-    TSParameterReference { Fg },
-    TSProperty { Green },
-    TSPunctBracket { Fg },
-    TSPunctDelimiter { Grey },
-    TSPunctSpecial { Fg },
-    TSRepeat { Red },
-    TSString { Yellow },
-    TSStringEscape { Green },
-    TSStringRegex { Green },
-    TSStructure { Orange },
-    TSTag { Orange },
-    TSTagDelimiter { Green },
-    TSText { Green },
-    TSType { Aqua },
-    TSTypeBuiltin { BlueItalic },
-    TSURI { markdownUrl },
-    TSVariable { Fg },
-    TSVariableBuiltin { PurpleItalic },
-    TSEmphasis { fg = nil, bg = nil, gui = "bold" },
-    TSUnderline { fg = nil, bg = nil, gui = "underline" },
+    WinBar { fg = bg0, bg = yellow, gui = "italic" },
+    WinBarNC { fg = fg, bg = bg_yellow, gui = "italic" },
+
+    sym("@annotation") { Purple },
+    sym("@attribute") { Purple },
+    sym("@boolean")  { Purple },
+    sym("@character") { Yellow },
+    sym("@comment") { Grey },
+    sym("@conditional") { Red },
+    sym("@constant.builtin") { PurpleItalic },
+    sym("@constant.macro") { Purple },
+    sym("@constant") { PurpleItalic },
+    sym("@constructor") { Fg },
+    sym("@error") { ErrorText },
+    sym("@exception") { Red },
+    sym("@field") { Green },
+    sym("@float") { Purple },
+    sym("@function.builtin") { Green },
+    sym("@function.macro") { Green },
+    sym("@function") { Green },
+    sym("@include") { PurpleItalic },
+    sym("@keyword") { Red },
+    sym("@keyword.function") { RedItalic },
+    sym("@label") { Orange },
+    sym("@method") { Green },
+    sym("@namespace") { BlueItalic },
+    sym("@number") { Purple },
+    sym("@operator") { Orange },
+    sym("@parameter") { Fg },
+    sym("@parameter.reference") { Fg },
+    sym("@property") { Green },
+    sym("@punctuation.bracket") { Fg },
+    sym("@punctuation.delimiter") { Grey },
+    sym("@punctuation.special") { Fg },
+    sym("@repeat") { Red },
+    sym("@string") { Yellow },
+    sym("@string.escape") { Green },
+    sym("@string.regex") { Green },
+    sym("@structure") { Orange },
+    sym("@tag") { Orange },
+    sym("@tag.delimiter") { Green },
+    sym("@text") { Green },
+    sym("@type") { Aqua },
+    sym("@type.builtin") { BlueItalic },
+    sym("@uri") { markdownUrl },
+    sym("@variable") { Fg },
+    sym("@variable.builtin") { PurpleItalic },
+    sym("@emphasis") { fg = nil, bg = nil, gui = "bold" },
+    sym("@underline") { fg = nil, bg = nil, gui = "underline" },
 
     GitGutterAdd { GreenSign },
     GitGutterChange { BlueSign },
@@ -409,8 +435,6 @@ local theme = lush(function()
     CmpItemAbbrMatchFuzzy { markdownH4 },
     CmpItemMenu { bg = bg0 },
 
-    WinBar { fg = bg0, bg = yellow, gui = "italic" },
-    WinBarNC { fg = fg, bg = bg_yellow, gui = "italic" },
 
     FineCmdNormal {fg = fg, bg = bg1},
     FineCmdFloatBorder {fg = fg, bg = nil},
