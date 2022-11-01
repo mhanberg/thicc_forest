@@ -80,18 +80,18 @@ vim.g.fzf_colors = {
 --
 --
 
-	-- fg = { "fg", "Normal" },
-	-- bg = { "bg", "Normal" },
-	-- hl = { "fg", "Green" },
-	-- ["fg+"] = { "fg", "CursorLine", "CursorColumn", "Normal" },
-	-- ["bg+"] = { "bg", "CursorLine", "CursorColumn" },
-	-- ["hl+"] = { "fg", "Cyan" },
-	-- info = { "fg", "Aqua" },
-	-- prompt = { "fg", "Orange" },
-	-- pointer = { "fg", "Blue" },
-	-- marker = { "fg", "Yellow" },
-	-- spinner = { "fg", "Yellow" },
-	-- header = { "fg", "Grey" },
+-- fg = { "fg", "Normal" },
+-- bg = { "bg", "Normal" },
+-- hl = { "fg", "Green" },
+-- ["fg+"] = { "fg", "CursorLine", "CursorColumn", "Normal" },
+-- ["bg+"] = { "bg", "CursorLine", "CursorColumn" },
+-- ["hl+"] = { "fg", "Cyan" },
+-- info = { "fg", "Aqua" },
+-- prompt = { "fg", "Orange" },
+-- pointer = { "fg", "Blue" },
+-- marker = { "fg", "Yellow" },
+-- spinner = { "fg", "Yellow" },
+-- header = { "fg", "Grey" },
 
 vim.g.VM_Mono_hl = "Cursor"
 vim.g.VM_Extend_hl = "Visual"
@@ -102,6 +102,9 @@ vim.g.VM_Insert_hl = "Cursor"
 local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
+    Normal { fg = fg, bg = bg0 }, -- normal text
+    NormalFloat { fg = fg, bg = bg2 }, -- Normal text in floating windows.
+    FloatBorder { fg = fg, bg = bg2 }, -- Normal text in floating windows.
     ColorColumn { fg = nil, bg = bg1 }, -- used for the columns set with 'colorcolumn'
     Conceal { fg = grey1, bg = nil }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor { fg = nil, bg = nil, gui = "reverse" }, -- character under the cursor
@@ -130,13 +133,10 @@ local theme = lush(function(injected_functions)
     CursorLineNr { fg = fg, bg = bg1 }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
     MatchParen { fg = nil, bg = bg4 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     ModeMsg { fg = fg, bg = nil, gui = "bold" }, -- 'showmode' message (e.g., "-- INSERT -- ")
-    -- MsgArea      { }, -- Area for messages and cmdline
-    -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
+    MsgArea { Normal }, -- Area for messages and cmdline
+    MsgSeparator { Normal }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg { fg = yellow, bg = nil, gui = "bold" }, -- |more-prompt|
     NonText { fg = bg4, bg = nil }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Normal { fg = fg, bg = bg0 }, -- normal text
-    NormalFloat { fg = fg, bg = bg2 }, -- Normal text in floating windows.
-    FloatBorder { fg = fg, bg = bg2 }, -- Normal text in floating windows.
     FloatermBorder { fg = fg, guibg = bg }, -- Border for Floaterm.
     -- NormalNC     { }, -- normal text in non-current windows
     Pmenu { fg = fg, bg = bg2 }, -- Popup menu: normal item.
@@ -257,13 +257,13 @@ local theme = lush(function(injected_functions)
 
     DiagnosticError { ErrorText },
     DiagnosticWarn { WarningText },
-    DiagnosticInfo{ InfoText },
+    DiagnosticInfo { InfoText },
     DiagnosticHint { HintText },
 
     DiagnosticVirtualTextError { VirtualTextError },
     DiagnosticVirtualTextWarn { VirtualTextWarning },
-    DiagnosticVirtualTextInfo{ VirtualTextInfo },
-    DiagnosticVirtualTextHint { VirtualTextHint},
+    DiagnosticVirtualTextInfo { VirtualTextInfo },
+    DiagnosticVirtualTextHint { VirtualTextHint },
 
     DiagnosticFloatingError { ErrorFloat },
     DiagnosticFloatingWarn { WarningFloat },
@@ -284,8 +284,8 @@ local theme = lush(function(injected_functions)
     LspReferenceRead { CurrentWord },
     LspReferenceWrite { CurrentWord },
 
-    LspCodeLens { HintText },
-    LspCodeLensSeparator { HintText },
+    LspCodeLens { gui = "italic", fg = grey2 },
+    LspCodeLensSeparator { LspCodeLens },
 
     TermCursor { Cursor },
     healthError { Red },
@@ -330,21 +330,22 @@ local theme = lush(function(injected_functions)
 
     sym("@annotation") { Purple },
     sym("@attribute") { Purple },
-    sym("@boolean")  { Purple },
+    sym("@boolean") { Purple },
     sym("@character") { Yellow },
     sym("@comment") { Grey },
     sym("@conditional") { Red },
+    sym("@constant") { PurpleItalic },
     sym("@constant.builtin") { PurpleItalic },
     sym("@constant.macro") { Purple },
-    sym("@constant") { PurpleItalic },
     sym("@constructor") { Fg },
+    sym("@emphasis") { fg = nil, bg = nil, gui = "bold" },
     sym("@error") { ErrorText },
     sym("@exception") { Red },
     sym("@field") { Green },
     sym("@float") { Purple },
+    sym("@function") { Green },
     sym("@function.builtin") { Green },
     sym("@function.macro") { Green },
-    sym("@function") { Green },
     sym("@include") { PurpleItalic },
     sym("@keyword") { Red },
     sym("@keyword.function") { RedItalic },
@@ -361,6 +362,7 @@ local theme = lush(function(injected_functions)
     sym("@punctuation.special") { Fg },
     sym("@repeat") { Red },
     sym("@string") { Yellow },
+    sym("@symbol") { Blue },
     sym("@string.escape") { Green },
     sym("@string.regex") { Green },
     sym("@structure") { Orange },
@@ -369,11 +371,10 @@ local theme = lush(function(injected_functions)
     sym("@text") { Green },
     sym("@type") { Aqua },
     sym("@type.builtin") { BlueItalic },
+    sym("@underline") { fg = nil, bg = nil, gui = "underline" },
     sym("@uri") { markdownUrl },
     sym("@variable") { Fg },
     sym("@variable.builtin") { PurpleItalic },
-    sym("@emphasis") { fg = nil, bg = nil, gui = "bold" },
-    sym("@underline") { fg = nil, bg = nil, gui = "underline" },
 
     GitGutterAdd { GreenSign },
     GitGutterChange { BlueSign },
@@ -436,8 +437,8 @@ local theme = lush(function(injected_functions)
     CmpItemMenu { bg = bg0 },
 
 
-    FineCmdNormal {fg = fg, bg = bg1},
-    FineCmdFloatBorder {fg = fg, bg = nil},
+    FineCmdNormal { fg = fg, bg = bg1 },
+    FineCmdFloatBorder { fg = fg, bg = nil },
 
     NotifyERRORBorder { fg = red },
     NotifyWARNBorder { fg = orange },
@@ -448,7 +449,7 @@ local theme = lush(function(injected_functions)
     NotifyERRORIcon { fg = red },
     NotifyWARNIcon { fg = orange },
     NotifyINFOIcon { fg = green },
-    NotifyDEBUGIcon { fg = cyan  },
+    NotifyDEBUGIcon { fg = cyan },
     NotifyTRACEIcon { fg = fg },
 
     NotifyERRORTitle { fg = red },
@@ -461,7 +462,49 @@ local theme = lush(function(injected_functions)
     NotifyWARNBody { Normal },
     NotifyINFOBody { Normal },
     NotifyDEBUGBody { Normal },
-    NotifyTRACEBody { Normal }
+    NotifyTRACEBody { Normal },
+
+    NoiceCmdline { MsgArea }, -- Normal for the classic cmdline area at the bottom"
+    NoiceCmdlineIcon { DiagnosticSignInfo, bg = bg2 }, -- Cmdline icon
+    NoiceCmdlineIconSearch { DiagnosticSignWarn, bg = bg2 }, -- Cmdline search icon (`/` and `?`)
+
+    NoiceCmdlinePopup { NormalFloat }, -- Normal for the cmdline popup
+    NoiceCmdlinePopupBorder { FloatBorder }, -- Cmdline popup border
+    NoiceCmdlinePopupBorderCmdline { NormalFloat},
+
+    NoiceCmdlinePopupSearchBorder { FloatBorder, fg = yellow }, -- Cmdline popup border for search
+    NoiceConfirm { Normal }, -- Normal for the confirm view
+    NoiceConfirmBorder { DiagnosticSignInfo }, -- Border for the confirm view
+    NoiceCursor { Cursor }, -- Fake Cursor
+    NoiceMini { MsgArea }, -- Normal for mini view
+    NoicePopup { NormalFloat }, -- Normal for popup views
+    NoicePopupBorder { FloatBorder }, -- Border for popup views
+    NoicePopupmenu { Pmenu }, -- Normal for the popupmenu
+    NoicePopupmenuBorder { FloatBorder }, -- Popupmenu border
+    NoicePopupmenuMatch { Special }, -- Part of the item that matches the input
+    NoicePopupmenuSelected { PmenuSel }, -- Selected item in the popupmenu
+    NoiceScrollbar { PmenuSbar }, -- Normal for scrollbar
+    NoiceScrollbarThumb { PmenuThumb }, -- Scrollbar thumb
+    NoiceSplit { NormalFloat }, -- Normal for split views
+    NoiceSplitBorder { FloatBorder }, -- Border for split views
+    NoiceVirtualText { DiagnosticVirtualTextInfo }, -- Default hl group for virtualtext views
+    NoiceFormatProgressDone { Search }, -- Progress bar done
+    NoiceFormatProgressTodo { CursorLine }, -- progress bar todo
+    NoiceFormatEvent { NonText },
+    NoiceFormatKind { NonText },
+    NoiceFormatDate { Special },
+    NoiceFormatConfirm { CursorLine },
+    NoiceFormatConfirmDefault { Visual },
+    NoiceFormatTitle { Title },
+    NoiceFormatLevelDebug { NonText },
+    NoiceFormatLevelTrace { NonText },
+    NoiceFormatLevelOff { NonText },
+    NoiceFormatLevelInfo { DiagnosticVirtualTextInfo },
+    NoiceFormatLevelWarn { DiagnosticVirtualTextWarn },
+    NoiceFormatLevelError { DiagnosticVirtualTextError },
+    NoiceLspProgressSpinner { Constant }, -- Lsp progress spinner
+    NoiceLspProgressTitle { NonText }, -- Lsp progress title
+    NoiceLspProgressClient { Title } -- Lsp progress client name
   }
 end)
 
